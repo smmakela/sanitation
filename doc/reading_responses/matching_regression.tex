@@ -1,0 +1,101 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\author{Susanna Makela}
+\title{Regression and Matching}
+
+\usepackage{filecontents}
+
+\begin{filecontents}{matreg.bib}
+@article{ho_etal,
+	title = {Matching as Nonparameteric Preprocessing for Reducing Model Dependence in Parameteric Causal Inference},
+	author = {Ho, D.E. and Imai, K. and King, G. and Stuart, E.A.},
+	journal = {Political Analysis},
+	year = 2007,
+	number = 15,
+	pages = {199-236},
+	doi = {10.1093/pan/mpl013},
+	url = {http://dx.doi.org/10.1093/pan/mpl013}
+}
+@article{shalizi,
+	title = {Advanced Data Analysis from an Elementary Point of View},
+	author = {Shalizi, Cosma},
+	year = 2015,
+	notes = {Forthcoming book},
+	url = {http://stat.cmu.edu/~cshalizi/ADAfaEPoV/ADAfaEPoV.pdf}
+}
+@book{imbens_rubin,
+	author = {Imbens, Guido W. and Rubin, Donald B.},
+	title = {Causal Inference for Statistics, Social, and Biomedical Sciences: An Introduction},
+	year = {2015},
+	isbn = {0521885884, 9780521885881},
+	publisher = {Cambridge University Press},
+	address = {New York, NY, USA},
+} 	
+\end{filecontents}
+
+\usepackage[style=authoryear,backend=bibtex]{biblatex}
+\bibliography{matreg}
+
+
+\begin{document}
+\maketitle
+
+My response this week is a (partial) attempt to connect the Shalizi reading to matching.
+
+The matching estimator for the ATE in Chapter 24 of \textcite{shalizi}
+\[
+	ATE = \mathbb{E}[\mu(1, S) - \mu(0, S)],
+\]
+where $\mu(x, s) = \mathbb{E}[Y|X = x, S = s]$, $X$ is the causal variable, and $S$ is a set of variables satisfying the back-door criterion. If we could observe $\mu$, the law of large numbers would lead to the approximation
+\begin{equation}\label{eq:ate_approx}
+	ATE \approx \frac{1}{n} \sum_{i=1}^n (\mu(1, s_i) - \mu(0, s_i)).
+\end{equation}
+
+We of course can't actually observe $\mu$. Let's assume $Y_i = \mu(x_i, s_i) + \epsilon_i$, where $\epsilon_i$ is mean-zero noise. Suppose we have $n = 2m$ observations and can exactly match each treated observation $i$ (those observations for which $x_i=1$) with an untreated observation $i^*$ ($x_{i^*}=0$) such that $s_i = s_{i^*}$. Then since
+\[
+	Y_i - Y_{i^*} = \mu(1, s_i) + \epsilon_i - \mu(0, s_i) - \epsilon_{i^*},
+\]
+we can take an average over all $m$ pairs
+\begin{align}
+	\frac{1}{m} &\sum_{i=1}^m (Y_i - Y_{i^*}) \label{eq:diff_means}\\
+	&= \frac{1}{m} \sum_{i=1}^m (\mu(1, s_i) - \mu(0, s_i)) + \frac{1}{n} \sum_{i=1}^n \epsilon_i \nonumber\\
+	&\approx ATE \nonumber,
+\end{align}
+since the noise should converge to 0 as $n \rightarrow \infty$.
+
+This works fine if we are able to match exactly, but in practice exact matching is often infeasible. The set $S$ may consist of many variables or continuous variables that have to be (arbitrarily) discretized. Forcing exact matches may leave us with only a small subset of our observations, making the above approximation less exact. As noted in \textcite{ho_etal}, inexact matching followed by the difference-in-means estimator \eqref{eq:diff_means} assumes that any remaining imbalance in the data is strictly unrelated to the treatment, which we know to be false (since we are making the assumption that $S$ is the set of variables satisfying the back-door criterion). It also assumes that the imbalance has no effect on the outcome, which we have no evidence about before consulting the outcome, and if our matching is to be valid, we obviously cannot base it on the outcome variable.
+
+I guess one way to connect this to Pearl's framework is that matching provides some assurance that our estimates may still be valid even if our causal graph is wrong. If the graph is wrong and there is some back door path that remains open (in other words, $S$ is missing some variable), then simply conditioning on $S$ will give us biased estimates. But if we are able to make the distributions of variables in $S$ as similar as possible between treatment and control, and if any lurking confounder is highly correlated with $S$ (a possibly strong assumption) then the fact that we are not able to observe and control for this lurking confounder will be less problematic.
+
+Propensity score matching is an attractive option, in that it is the coarsest balancing score as described in Chapter 12 of \textcite{imbens_rubin}. One issue is that it requires us to estimate the propensity score, since the true propensity scores are not found. However, if we can match on estimated propensity scores in such a way that the distributions of covariates are balanced between treatment and control groups, then we can be confident that our estimated propensity scores are consistent for the true propensity scores; this is referred to as the ``propensity score tautology'' by \textcite{ho_etal}. 
+
+The matching-followed-by-regression estimator is of the form
+\[
+	\widehat{ATE} = \frac{1}{m} \sum_{i=1}^m (\widehat{\mu}(1, s_i) - \widehat{\mu}(0, s_i)),
+\]
+where $\widehat{\mu}(x, s_i)$ is a regression estimate of $\mathbb{E}[Y|X = x, S = s]$ of the form $g(\alpha + \beta X_i + \gamma S_i)$. In the case of linear regression, $g(\alpha + \beta X_i + \gamma S_i) = \alpha + \beta X_i + \gamma S_i$ and the estimator simplifies to
+\[
+	\widehat{ATE} = \widehat{\beta}.
+\]
+
+One attractive property of matching followed by a parametric regression of the form $\mathbb{E}[Y|X = x, S = s] = g(\alpha + \beta X_i + \gamma S_i)$ is that this procedure is doubly robust: under weak conditions, ``if either the matching or the parametric model is correct, but not necessarily both, causal estimates will still be consistent'' (\cite{ho_etal}). 
+
+%Matching before regression reduces the dependence of the results on the specific parametric form, as described in \textcite{ho_etal}. 
+
+%
+%Recall that the goal of matching in an observational study is to create a dataset that, to the extent possible, mimics a randomized experiment in the sense that potential confounders $S$ are unrelated to treatment $X$. In order to do this, we need
+%\[
+%	\tilde{p}(S | X = 1) = \tilde{p}(S | X = 0)
+%\]
+%to hold in the data ($\tilde{p}$ here refers to the empirical distribution of the data). A procedure that selects, drops, or duplicates observations in pursuit of this goal using a rule that depends only on $S$ and $X$ will not induce bias in the estimate of the causal effect. A matching procedure that produces good balance leaves us more confident that we have broken the link between treatment and potential confounders. To tie this idea more concretely to the counterfactual framework, if $S$ does in fact satisfy the back-door criteriony
+
+
+\printbibliography
+
+\end{document}

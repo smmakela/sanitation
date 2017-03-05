@@ -1,0 +1,111 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{ho_etal}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Ho}{H.}%
+     {D.E.}{D.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Imai}{I.}%
+     {K.}{K.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {King}{K.}%
+     {G.}{G.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Stuart}{S.}%
+     {E.A.}{E.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{HD+1}
+  \strng{fullhash}{HDIKKGSE1}
+  \field{labelyear}{2007}
+  \field{sortinit}{H}
+  \verb{doi}
+  \verb 10.1093/pan/mpl013
+  \endverb
+  \field{number}{15}
+  \field{pages}{199\bibrangedash 236}
+  \field{title}{Matching as Nonparameteric Preprocessing for Reducing Model
+  Dependence in Parameteric Causal Inference}
+  \verb{url}
+  \verb http://dx.doi.org/10.1093/pan/mpl013
+  \endverb
+  \field{journaltitle}{Political Analysis}
+  \field{year}{2007}
+\endentry
+
+\entry{imbens_rubin}{book}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Imbens}{I.}%
+     {Guido~W.}{G.~W.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rubin}{R.}%
+     {Donald~B.}{D.~B.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Cambridge University Press}%
+  }
+  \strng{namehash}{IGWRDB1}
+  \strng{fullhash}{IGWRDB1}
+  \field{labelyear}{2015}
+  \field{sortinit}{I}
+  \field{isbn}{0521885884, 9780521885881}
+  \field{title}{Causal Inference for Statistics, Social, and Biomedical
+  Sciences: An Introduction}
+  \list{location}{1}{%
+    {New York, NY, USA}%
+  }
+  \field{year}{2015}
+\endentry
+
+\entry{shalizi}{article}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Shalizi}{S.}%
+     {Cosma}{C.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SC1}
+  \strng{fullhash}{SC1}
+  \field{labelyear}{2015}
+  \field{sortinit}{S}
+  \field{title}{Advanced Data Analysis from an Elementary Point of View}
+  \verb{url}
+  \verb http://stat.cmu.edu/~cshalizi/ADAfaEPoV/ADAfaEPoV.pdf
+  \endverb
+  \field{year}{2015}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

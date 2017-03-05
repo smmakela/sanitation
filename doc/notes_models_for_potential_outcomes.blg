@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: notes_models_for_potential_outcomes.aux
+The style file: abbrvnat.bst
+Database file #1: sanitation.bib
+You've used 2 entries,
+            2773 wiz_defined-function locations,
+            608 strings with 5057 characters,
+and the built_in function-call counts, 991 in all, are:
+= -- 77
+> -- 78
+< -- 1
++ -- 26
+- -- 24
+* -- 85
+:= -- 169
+add.period$ -- 8
+call.type$ -- 2
+change.case$ -- 13
+chr.to.int$ -- 2
+cite$ -- 4
+duplicate$ -- 41
+empty$ -- 66
+format.name$ -- 28
+if$ -- 196
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 4
+newline$ -- 20
+num.names$ -- 8
+pop$ -- 29
+preamble$ -- 1
+purify$ -- 12
+quote$ -- 0
+skip$ -- 32
+stack$ -- 0
+substring$ -- 4
+swap$ -- 3
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 12
+warning$ -- 0
+while$ -- 6
+width$ -- 0
+write$ -- 38

@@ -1,0 +1,19 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{setspace}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Susanna Makela}
+\title{Chapter 2 Response}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+Chapter 2 of Winship and Morgan describes some of the basic concepts in causal inference: the definition of a causal state, potential outcomes, the mathematical definition of an average causal effect, SUTVA, and some basic estimation methods that illustrate what can go wrong with naive approaches to causal inference.
+
+For me, the most interesting part of this chapter was the first section where the authors discuss the definition of a causal state. It's something that has always been slightly confusing for me, perhaps because the debates often turn highly philosophical and I can no longer follow them. I'm particularly interested in Paul Holland's (I believe widely accepted?) principle of ``no causation without manipulation'', a position that, according to him, rules out investigating factors like sex and race as causal treatments. Winship and Morgan don't take an explicit position on this, but their statement of presupposing ``the existence of well-defined causal states to which all members of the population of interest could be exposed'' could be interpreted to agree with Holland's statement.
+
+The section on SUTVA reminded me of an interesting talk I heard earlier in the fall. A researcher had wanted to understand to what extent the SUTVA assumption could be relaxed in the context of a randomized experiment, while still retaining the ability to get unbiased estimates of the average treatment effect. The network structure of the units of course plays a large role in this, but I recall that it turns out that in a large enough experiment with ``reasonable'' levels of interactions between units (the definition of reasonable escapes me), we don't have to worry too much about violations of SUTVA. I'd be very interested in knowing how this all plays out in observational studies, but this is of course much more difficult and would involve making much stronger assumptions.
+\end{document}

@@ -1,0 +1,83 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+% define shortcut for "independent" symbol
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[round,authoryear]{natbib}
+\bibliographystyle{abbrvnat}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Susanna Makela}
+\title{Model-Based Approach to Causal Inference}
+\begin{document}
+\maketitle
+
+This is a summary of what we talked about in class on March 1st and is based on Chapter 8 of \cite{imbens_rubin} and Chapter 8 of \cite{bda3}.
+
+%Suppose we have a binary treatment $W_i$ and corresponding potential outcomes $Y_i(0)$ and $Y_i(1)$ for each unit in a (super) population, and a vector of covariates $X_i$. Suppose also that the assignment mechanism is regular, meaning that unit-level treatment probabilities are \textit{probabilistic} (strictly between 0 and 1), \textit{individualistic} (depend only on potential outcomes and covariates for that unit), and \textit{unconfounded}, such that
+%\[
+%	W_i \independent (Y_i(0), Y_i(1)) \mid X_i.
+%\]
+
+Suppose we are in the context of randomized trial with a binary treatment. In that case, the vector of treatment assignments $\mathbf{W}$ is independent of the vectors of potential outcomes $(\mathbf{Y}(0), \mathbf{Y}(1))$. Our goal is to estimate a (super-) population treatment effect
+\begin{equation}\label{eq:goal}
+	\mathbb{E} \left[ \tau(\mathbf{Y}(0), \mathbf{Y}(1)) \mid \mathcal{D} \right],
+\end{equation}
+where $\mathcal{D}$ denotes the observed data $\mathcal{D} = (\mathbf{Y}_{obs}, \mathbf{W})$ for some sample of size $n$ from the super-population so that
+\begin{equation}\label{eq:y_obs}
+	\mathbf{Y}_{obs} = (Y_{1, obs}, \ldots, Y_{n, obs}) \quad \text{and} \quad Y_{i, obs} = W_i Y_i(1) + (1 - W_i) Y_i(0).
+\end{equation}
+One common choice for $\tau(\mathbf{Y}(0), \mathbf{Y}(1))$ is simply the difference
+\[
+	\tau(\mathbf{Y}(0), \mathbf{Y}(1)) = Y_i(1) - Y_i(0),
+\]
+so that we can write the treatment effect as
+\[
+	\mathbb{E} \left[ Y_i(1) - Y_i(0) \mid \mathcal{D} \right].
+\]
+
+Let's expand our estimand \eqref{eq:goal} using iterated expectations:
+\begin{align*}
+	\mathbb{E}&[\tau(\mathbf{Y}(0), \mathbf{Y}(1)) \mid \mathcal{D}] \\[3pt]
+	&= \mathbb{E}[\tau(\mathbf{Y}(0), \mathbf{Y}(1)) \mid \mathbf{Y}_{obs}, \mathbf{W}] \\[3pt]
+	&= \mathbb{E} [ \tilde{\tau}(\mathbf{Y}_{obs}, \mathbf{Y}_{mis}) \mid \mathbf{Y}_{obs}, \mathbf{W} ] \\[3pt]
+	%&= \mathbb{E} \left[ \mathbb{E} [ \tau(\mathbf{Y}(0), \mathbf{Y}(1)) \mid \theta, \mathbf{Y}_{obs}, \mathbf{W} ] \mid \mathbf{Y}_{obs}, \mathbf{W} \right]
+	%&= \mathbb{E} \left[ \mathbb{E} [ \tilde{\tau}(\mathbf{Y}_{obs}, \mathbf{Y}_{mis}) \mid \theta, \mathbf{Y}_{obs}, \mathbf{W} ] \mid \mathbf{Y}_{obs}, \mathbf{W} \right],
+\end{align*}
+where we've now rewritten the original treatment effect $\tau(\mathbf{Y}(0), \mathbf{Y}(1))$ in terms of the observed and missing data $\tilde{\tau}(\mathbf{Y}_{obs}, \mathbf{Y}_{mis})$, which we can do because of how we defined $\mathbf{Y}_{obs}$ in \eqref{eq:y_obs}. This final expectation is the posterior expectation of the treatment effect. We therefore need the posterior distribution of $\tilde{\tau}$, which is the conditional distribution of $\tilde{\tau}$ given the observed data $(\mathbf{Y}_{obs}, \mathbf{W})$:
+\begin{equation}\label{eq:tau_posterior}
+	p(\tilde{\tau} \mid \mathbf{Y}_{obs}, \mathbf{W}).
+\end{equation}
+
+How do we compute this quantity? Note that we can write \eqref{eq:tau_posterior} as a marginal distribution where we've integrated out $\mathbf{Y}_{mis}$:
+\begin{align*}
+	p(\tilde{\tau} \mid \mathbf{Y}_{obs}, \mathbf{W}) &= \int p(\tilde{\tau}, \mathbf{y}_{mis} \mid \mathbf{Y}_{obs}, \mathbf{W}) ~\text{d}\mathbf{y}_{mis} \\[3pt]
+	&= \int p(\tilde{\tau} \mid \mathbf{y}_{mis}, \mathbf{Y}_{obs}, \mathbf{W}) ~p(\mathbf{y}_{mis} \mid \mathbf{Y}_{obs}, \mathbf{W}) ~\text{d}\mathbf{y}_{mis},
+\end{align*}
+The first term is simple to understand: given values of $\mathbf{Y}_{obs}$ and $\mathbf{W}$ and draws of $\mathbf{Y}_{mis}$, we can calculate $\tilde{\tau}$, thereby generating a draw from $p(\tilde{\tau} | \mathbf{Y}_{mis}, \mathbf{Y}_{obs}, \mathbf{W})$.  The second term in the integral is the posterior predictive distribution for $\mathbf{Y}_{mis}$. To obtain draws from this distribution, we first draw a value of $\theta$ from its posterior distribution given the observed data $(\mathbf{Y}_{obs}, \mathbf{W})$ and then draw a value of $\mathbf{Y}_{mis}$ from its posterior distribution given the observed data and $\theta$. This relationship becomes clear when we write the second term, $p(\mathbf{y}_{mis} \mid \mathbf{Y}_{obs}, \mathbf{W})$, as a marginal distribution over $\theta$:
+\begin{equation}\label{eq:ppd_ymis}
+	p(\mathbf{y}_{mis} \mid \mathbf{Y}_{obs}, \mathbf{W}) &= \int p(\mathbf{y}_{mis}, \theta \mid \mathbf{Y}_{obs}, \mathbf{W}) ~\text{d}\theta \nonumber\\[3pt]
+	&= \int p(\mathbf{y}_{mis} \mid \theta, \mathbf{Y}_{obs}, \mathbf{W}) p(\theta \mid \mathbf{Y}_{obs}, \mathbf{W}) ~\text{d}\theta.
+\end{equation}
+
+The question now becomes how to obtain $p(\theta \mid \mathbf{Y}_{obs}, \mathbf{W})$, the posterior distribution of $\theta$ given the observed data $(\mathbf{Y}_{obs}, \mathbf{W})$. To calculate this, we can follow the ideas in Chapter 8 (specifically, pp 200-203 of \cite{bda3}). Note that \cite{bda3} uses the parameter $\phi$, which governs the distribution of the inclusion vector $\mathbf{W}$, but since we are assuming a randomized trial, $p(\mathbf{W}) = \alpha$ for some constant $\alpha$ (generally 0.5). The posterior distribution of $\theta$ is then
+\begin{align*}
+	p(\theta \mid \mathbf{Y}_{obs}, \mathbf{W}) &\propto p(\theta) p(\mathbf{Y}_{obs}, \mathbf{W} \mid \theta) \\[3pt]
+	&= p(\theta) \int p(\mathbf{y}_{mis}, \mathbf{Y}_{obs}, \mathbf{W} \mid \theta) ~\text{d} y_{mis} \\[3pt]
+	&\propto p(\theta) \int p(\mathbf{y}_{mis}, \mathbf{Y}_{obs} \mid \theta) ~\text{d} y_{mis} \\[3pt]
+	&= p(\theta) p(\mathbf{Y}_{obs} \mid \theta)
+\end{align*}
+where the second-to-last line follows from the fact that $\mathbf{W}$ is independent of $(\mathbf{Y}(0), \mathbf{Y}(1))$ and thus of $(\mathbf{Y}_{mis}, \mathbf{Y}_{obs})$, and from folding the constant $p(\mathbf{W})$ into the denominator.
+%The term $p(\mathbf{y}_{mis}, \mathbf{Y}_{obs} \mid \theta)$ is simply the complete-data likelihood, which we as the analyst specify.
+
+Once we have samples from the posterior distribution $p(\theta) p(\mathbf{Y}_{obs} \mid \theta)$ (e.g. from using Stan), we can take each posterior sample and draw a value of $\mathbf{y}_{mis}$ 
+
+In practice, we would do the following in Stan. First, 
+
+\bibliography{sanitation}
+
+\end{document}
