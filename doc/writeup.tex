@@ -1,34 +1,289 @@
-\documentclass[10pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{setspace}
+\usepackage{outlines}
 \onehalfspacing
 \usepackage[round,authoryear]{natbib}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 \bibliographystyle{abbrvnat}
-\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
 \author{Susanna Makela}
 \title{The Causal Relationship between Sanitation and Child Height \\
 		\Large Effects at Household and Community Levels}
 \begin{document}
 \maketitle
 
-\section*{Introduction}
+%\begin{outline}[enumerate]
+%	\1 introduction
+%		\2 brief description of problem
+%		\2 outline of paper
+%		\2 causal questions
+%		\2 data
+%		\2 methodological challenges
+%	\1 causal inference framework
+%		\2 relaxing SUTVA
+%			\3 major identifying assumptions
+%			\3 introduction of notation
+%		\2 causal estimands
+%		\2 estimable effects under strong ignorability
+%	\1 propensity scores
+%		\2 models and stratification
+%		\2 estimates
+%	\1 conclusion
+%\end{outline}
+
+\section{Introduction}
+Height is an important measure of population health and human capital, with links to labor market outcomes, mortality, and cognitive achievement (cite here). While genetics play a major role in determining maximum height, early life nutrition and disease environment strongly influence the extent to which this height potential is achieved (CITE). One major determinant of the disease environment, particularly in less-developed countries, is exposure to poor sanitation in the form of open defecation. Globally, over a billion people practice open defecation, nearly 60\% of whom are in India \citep{jmp_2015}. India has one of the highest rates of open defecation, with over 60\% of its rural population and 44\% of the overall population lacking toilet or latrine facilities in 2015 \citep{jmp_2015}.
+
+India also has high rates of stunting, with 38\% of children in 2015 under the age of five being too short for their age \citep{nfhs4_factsheet}. Indeed, children in India are shorter, on average, than children in Africa, who are poorer, on average, and one proposed explanation for this ``Asian enigma'' is the high rates of open defecation in India \citep{spears_intl_variation}. Evidence in the form of a randomized field experiment \citep{village_san} and an ecological analysis at the district level \citep{ecological} suggests that there is a causal relationship between the sanitation environment at the neighborhood level and height-for-age among children in India. This study uses data from four household surveys to study the causal effects of open defecation at both the household and community levels in India using a sample of over XXX children.
+
+\subsection{Sanitation and child health in India}
+Previous studies have established strong links between sanitation and child health in India, particularly at the neighborhood level. \cite{geruso_spears} estimate that a 10 percentage-point reduction in neighborhood-level open defecation ``is associated with a decline in infant mortality of 6.5 infants per 1,000''. Children in India tend to be exceptionally short for their height, particularly compared to children in sub-Saharan African countries, where children are poorer, on average; this puzzle is known as the ``Asian enigma'', and some studies suggest that open defecation, which is substantially more prevalent in India than in sub-Saharan Africa, can account for much of this discrepancy \citep{spears_intl_variation}. Within India, an ecological analysis at the district level \citep{spears_ecological} estimates that a 10 percentage-point increase in open defecation is associated with a 0.7 percentage point increase in stunting and severe stunting. A recent randomized field experiment in rural Maharashtra, India, that subsidized construction of household pit latrines and promotes sanitation at the village level yielded an increase of about 0.3 height-for-age standard deviations among children children under five after 18 months \citep{village_san}. This estimate is close to the 0.2 height-for-age standard deviation increase associated with the Total Sanitation Campaign, an Indian government program dedication to building latrines and promoting sanitation in India \citep{spears_tsc}.
+
+\subsection{Causal questions}
+In this study, we examine the effects of open defecation at the household and neighborhood levels on height for age of Indian children aged three and younger. Specifically, we ask and answer the following questions:
+\begin{enumerate}
+	\item What is the effect of living in a household with a latrine in neighborhoods where the open defecation rate is low?
+	\item What is the effect of living in a household with a latrine in neighborhoods where the open defecation rate is high?
+	\item What is the effect of a high versus low neighborhood-level open defecation rate on children who are likely to live in a household with a latrine?
+	\item What is the dose-response relationship between neighborhood-level open defecation and height for age?
+	\item How does the dose-response relationship vary with household-level sanitation?
+\end{enumerate}
+Note that we use the terms open defecation and latrine use interchangeably; a household practicing open defecation is assumed to not use a latrine or toilet, and vice versa. The first three of the above questions closely parallel those asked by \cite{hong_raudenbush} in a study of the effect of kindergarten retention on reading outcomes. We follow and expand upon their analytical framework as described in Section 2 below.
+
+\subsection{Data}
+The data we use come from three rounds of the National Family Health Survey (NFHS) and the fourth round of the District-Level Household Survey (DLHS). The NFHS is a cross-sectional survey conducted in 1992-93, 1998-99, and 2005-06 intended to yield estimates of indicators of maternal and child health, nutrition, and reproductive health valid for the rural and urban parts of Indian states. The DLHS is also cross-sectional but was designed to be representative at the district level. We use the fourth round of the DLHS (DLHS-4), conducted in 2012-14. The DLHS-4 is the only round to include anthropometric measurements of height. It also omits nine of the less developed Indian states, which were instead covered by the Annual Health Survey (AHS). The AHS has much larger sample sizes than the DLHS and was designed to produce more accurate district-level estimates in these states \citep{dandona}.
+
+For the purposes of this study, we define ``neighborhood'' to be the primary sampling unit (PSU) to which each household belongs. In rural areas, the PSUs are generally villages of up to 500 households (larger villages are split in two), and in urban areas the PSUs are census enumeration blocks (CEBs) consisting of 150-200 households (technically, the urban PSUs are census wards in which the CEBs are nested, but since one CEB is selected per ward, we can think of the CEB as the PSU \citep{roy_acharya}).
+
+%The NFHS, DLHS, and AHS all employ complex multi-stage sampling designs, with samples drawn separately in rural and urban areas. For the NFHS, villages are the primary sampling units (PSUs) in rural areas and are sampled with probability proportional to size (PPS). Villages with more than 500 households are split in two, and one of the groups is sampled using PPS. A simple random sample of households is then taken in the sampled villages. In urban areas, the PSUs are census wards, which are sampled using PPS sampling. A PPS sample of census enumeration blocks is taken in the selected wards; census enumeration blocks consist of roughly 150-200 households. Finally, a simple random sample of households is taken	 in the selected census enumeration blocks.
+
+%While \cite{geruso_spears} suggest that there is little evidence for an interaction between household- and community-level open defecation; they found no difference in their causal estimates of the effect of neighborhood-level sanitation on infant mortality when estimated separately for households with and without latrines. Additionally, this claim was made in the context of infant mortality as the outcome. Mortality is much further down the causal chain from open defecation than is height for age. However, it may be that the interaction is actually operating at the neighborhood level. That is, it may be that household open defecation matters only in neighborhoods with low (or high) rates of open defecation. 
 
 
-\section*{Data}
+\section{Methods}
+We use the potential outcomes framework of \cite{rubin1978} to define causal effects and the estimands. In a population of $N$ children, $i = 1, \ldots, N$, we let $z_i$ denote the treatment status of the household in which child $i$ lives: $z_i = 1$ if the household practices open defecation and $z_i = 0$ if it does not. (Here we implicitly assume that each household has exactly one child. This is not exactly true, but X\% of the children in our data belong to distinct households.) We let $\mathbf{z} = (z_1, \ldots, z_N)$ denote the vector of treatment assignments for all $N$ children. Since the treatment is binary, $z_i \in \{0, 1\}$ and $\mathbf{z} \in \{0, 1\}^{2N}$. The potential outcome of child $i$, were their household's treatment status $z_i$ and the other households' treatments $\mathbf{z}_{-i} = (z_1, \ldots, z_{i-1}, z_{i+1}, \ldots, z_N)$, is $Y_i(\mathbf{z})$. In this study, our outcome is the height-for-age $z$-score: a child's height converted into a $z$-score relative to the 2006 WHO healthy reference population.
 
-\section*{Methods}
-\begin{itemize}
-	\item Pair matching PSUs that are far apart in terms of prop Muslim -- ``stronger'' IV?
-	\item OR pair-matching kids with different HH sanitation status across similar prop Muslim/prop OD PSUs -- this could get at the HH-leve effect?
-	\item Can we somehow formulate this as an observational version of the Imai et al matched-pair cluster-randomization idea?
-\end{itemize}
+A fundamental assumption that makes causal identification possible in the potential outcomes framework is the stable unit treatment value assumption (SUTVA). SUTVA states that there is a single version of the treatment and that the potential outcome of one unit is independent of the treatment assignment of the other units \citep{rubin1986}. In other words, SUTVA allows us to simplify the definition of potential outcome and write $Y_i(\mathbf{z}) \equiv Y_i(z_i, \mathbf{z}_{-i}) = Y_i(z_i)$. In our context, SUTVA implies that the potential outcome for a child depends only on the sanitation status of their own household and not on that of their neighbors.
 
-\section*{Results}
+A key methodological challenge in this study is that SUTVA is an unreasonable assumption. It is entirely plausible that the sanitation behavior of the neighbors of a given household can affect the potential outcome of a child in that household, regardless of the sanitation status of that household. Indeed, as discussed previously, several studies have found evidence of causal effects of neighborhood-level open defecation rates. Because open defecation by definition occurs outdoors, the practice of open defecation by one household necessarily exposes others in the neighborhood to possible contact with human waste. Furthermore, the effect of household-level open defecation may vary with the neighborhood-level rate. If it is analogous to vaccination, then the protective effect of latrine use at the household level may be weak in a neighborhood where open defecation rates are low and stronger in neighborhoods where it is higher. Alternatively, the opposite could be true: the benefits of household-level latrine use in a neighborhood with high open defecation rates may be insignificant compared to the negative effects of high exposure to waste but striking in a neighborhood with low open defecation rates. Either way, as the neighborhood-level open defecation varies from low to high -- that is, as more and more neighbors are ``assigned'' to the treatment status of open defecation -- it is not plausible that the potential outcome of a given child in a given household would remain unchanged.
 
-\section*{Discussion}
+\subsection{Causal inference framework}
+Our analytical framework is inspired by the approach taken by \cite{hong_raudenbush}, hereafter HR, in a study of the causal effect of kindergarten retention (i.e. repeating kindergarten) on reading outcomes, another context in which SUTVA is an implausible assumption. \cite{hong_raudenbush} handle this complication by assuming that the collective effects of $\mathbf{z}_{-i}$ on $Y_i(\mathbf{z})$ can be summarized by $z_i$ and a scalar function $v(\mathbf{z})$, so that
+\begin{equation}\label{eq:hr_pot_out}
+	Y_i(\mathbf{z}) \equiv Y_i(z_i, \mathbf{z}_{-i}) = Y_i(z_i, v(\mathbf{z})).
+\end{equation}
+HR restrict $v(\mathbf{z})$ to be binary, $v(\mathbf{z}) = 0$ for neighborhoods with low rates of open defecation and $v(\mathbf{z}) = 1$ for neighborhoods with high rates. In this study, we generalize their approach and allow $v(\mathbf{z})$ to take on values in $[0,1]$. Given two sets of possible treatment assignments for a single unit and all units, $(z, \mathbf{z})$ and $(z^{\prime}, \mathbf{z}^{\prime})$, a generic causal estimand is of the form $\mathbb{E}[Y(z, \mathbf{z}) - Y(z^{\prime}, \mathbf{z}^{\prime})]$. This formulation relies on three main assumptions as described by HR: a) causal inferences are generalized conditional on current neighborhood residence; b) there is no interference between neighborhoods, and c) treatment assignment at both the household and neighborhood levels are strongly ignorable conditional on observed covariates. Following HR, we briefly describe these three assumptions in the context of our study.
+
+\textit{Intact neighborhoods.} The generic estimand above implicitly ignores the assignment of individuals to neighborhoods. If we were to take this assignment into account, we would include the vector of neighborhood assignments $\mathbf{s}$ in the potential outcome, where $\mathbf{s} = (s_1, \ldots, s_N)$ and $s_i \in \{1, \ldots, J\}$ denotes which of the $J$ neighborhoods unit $i$ is assigned to. The estimand would then be
+\[
+	\mathbb{E}[Y(z, \mathbf{z}, \mathbf{s}) - Y(z^{\prime}, \mathbf{z}^{\prime}, \mathbf{s}^{\prime})],
+\]
+where $\mathbf{s}$ and $\mathbf{s}^{\prime}$ are two vectors of possible neighborhood assignments. However, we know that in the real world, people are not assigned to neighborhoods at random, and we wish to estimate causal effects conditional on actual neighborhood membership. We therefore condition our estimands on the observed neighborhood assignment $\mathbf{s}^*$:
+\[
+	\mathbb{E}[Y(z, \mathbf{z}, \mathbf{s}^*) - Y(z^{\prime}, \mathbf{z}^{\prime}, \mathbf{s}^*) \mid \mathbf{S} = \mathbf{s}^*].
+\]
+For clarity of notation, we consider all estimands to be conditional on $\mathbf{S} = \mathbf{s}^*$ from this point forward and do not explicitly write out this conditioning.
+
+\textit{No interference between neighborhoods.} We assume that the potential outcome for a child can be affected by the treatment assignments of other children in the same neighborhood, but not by the treatment assignments of children from other neighborhoods. We therefore write $\mathbf{z}_j = (z_{1j}, \ldots, z_{n_j j})$ for the vector of treatment assignments for the $n_j$ children in neighborhood $j$ and $\mathbf{s}_j = (j, \ldots, j)$ for the corresponding neighborhood assignments. The potential outcome for a child is then
+\[
+	Y_i(z_i, v(\mathbf{z}), \mathbf{s}^*) = Y_i(z_i, v(\mathbf{v}_{j[i]}), \mathbf{s}_{j[i]}^*) \equiv Y_i(z_i, v),
+\]
+where the notation $j[i]$ refers to the neighborhood $j$ that unit $i$ belongs to. We let $V = v(\mathbf{Z})$ denote the random variable taking on values $v(\mathbf{z}) = v \in [0, 1]$.
+
+\textit{Strongly ignorable treatment assignment.} We assume that the assignments of intact neighborhoods to open defecation level $V=v$ and children to household latrine use status $Z=z$ are ignorable conditional on observed neighborhood-level covariates $\mathbf{W}$ and child- and household-level covariates $\mathbf{X}$. Under this assumption, we can write
+\[
+	\mathbb{E}[Y(z,v) \mid Z=z, V=v, \mathbf{X} = \mathbf{x}, \mathbf{W} = \mathbf{w}] = \mathbb{E}[Y(z,v) \mid \mathbf{X} = \mathbf{x}, \mathbf{W} = \mathbf{w}],
+\]
+allowing us to estimate the conditional average causal effect
+\[
+	\mathbb{E}[Y(z,v) \mid \mathbf{X} = \mathbf{x}, \mathbf{W} = \mathbf{w}] - \mathbb{E}[Y(z^{\prime},v^{\prime}) \mid \mathbf{X} = \mathbf{x}, \mathbf{W} = \mathbf{w}]
+\]
+with the observed quantity
+\[
+	\mathbb{E}[Y(z,v) \mid Z=z, V=v, \mathbf{X} = \mathbf{x}, \mathbf{W} = \mathbf{w}] - \mathbb{E}[Y(z^{\prime},v^{\prime}) \mid Z=z^{\prime}, V=v^{\prime}, \mathbf{X} = \mathbf{x}, \mathbf{W} = \mathbf{w}]
+\]
+
+Together, the assumptions of intact neighborhoods, no interference between neighborhoods, and strong ignorability allow us to conceive of our observational data as approximating a two-stage experiment. In the first stage, neighborhoods are randomly assigned an open defecation rate within blocks defined by $\mathbf{W}$. In the second stage, households within neighborhoods are randomly assigned to binary latrine use within blocks defined by $\mathbf{X}$ and $\mathbf{W}$.
+%We briefly describe these three assumptions and then give more detail on this approximation.
+
+\subsection{Estimable causal quantities}
+An important feature of HR's analysis of kindergarten retention rates is their division of children into three subpopulations depending on their risks of retention under high and low school-level retention rates. As HR point out, this division is important because there are some children for whom some potential outcomes are undefined. There may be children who would never be retained regardless of the retention rate, while others may be retained under a high retention rate but not under a low one. These subpopulations and the estimands defined for each form the basis of their causal quantities of interest.
+
+The issue of some potential outcomes not being defined for some units does not apply to this study. While there may be children for whom kindergarten retention is an implausible treatment, there is no reason to believe that some households 
+
+We now consider which causal quantities can be estimated from our data under the assumption of strong ignorability. Again following the presentation of HR, we can think of our observational study as an approximation of a two-stage randomized experiment. Both stages use a randomized blcok design, first at the cluster level and then at the unit level within clusters. Thus, neighborhoods are first randomized to a continuous OD level $V = v \in [0,1]$ within blocks defined by $\mathbf{W}$ with probability $Q = Q(\mathbf{W})$: 
+\begin{equation}\label{eq:Q_def}
+	Q = \mathbb{P}(V=v \mid \mathbf{W}).
+\end{equation}
+Given the neighborhood OD rate, households with neighborhoods are randomly assigned an OD status, $Z=1$ for practicing OD and $Z=0$ for latrine use, within blocks defined by $\mathbf{X}$ and $\mathbf{W}$. The household-level probability of $Z=1$ is then $q_v = q_v(\mathbf{X}, \mathbf{W})$, where
+\begin{equation}\label{eq:qv_def}
+	q_v = \mathbb{P}(Z=1 \mid V=v, \mathbf{X}, \mathbf{W}),
+\end{equation}
+and a child's probability of living in a household with OD status $Z=z$ and neighborhood with OD rate $V=v$ is then
+\begin{equation}\label{eq:joint_prob}
+	\mathbb{P}(Z=z, V=v \mid \mathbf{X}, \mathbf{W}) = \mathbb{P}(Z=z \mid V=v, \mathbf{X}, \mathbf{W}) \mathbb{P}(V=v \mid\mathbf{W}).
+\end{equation}
+
+Under the two-stage randomized experiment, 
+
+%
+%since the effect of retention on a particular child could be affected by the retention status of other children, as well as the overall retention rate of the child's school. By making the assumption that conditioning on propensity scores of treatment at both the school and student levels render the assignment mechanism strongly ignorable, the authors treat their observational data as approximating a two-stage randomized experiment. This assumption, coupled with stratifying on the multilevel propensity score, allows them to estimate several causal quantities of interest: the effect of retention in high-retention schools and low-retention schools, and the effect of a high retention rate compared to a low retention rate.
+
+%We follow this overall approach, but while \cite{hong_raudenbush} assume that treatment assignments at both the group (school) and unit (student) levels are binary, we take an approach that allows the group-level treatment assignment to be continuous by using the generalized propensity score (GPS).
+%
+%The GPS was proposed in parallel work by \cite{imai_vandyk} and \cite{hirano_imbens}. The *brief discussion of GPS here*.
+%
+%Several methods exist for estimating the GPS \citep{imai_vandyk,hirano_imbens}. Recent studies have advocated using machine learning methods including boosting \citep{zhu_etal} and Super Learners \citep{kreif_etal}. However, as noted by \cite{kluve_etal}, the exact form of the GPS model is less important than the degree to which any given model balances the distribution of observed covariates for a given value or stratum of treatment. 
+%
+%
+%In attempting to estimate the effects of OD operating at both the household and neighborhood levels, we are entering a situation in which the stable unit treatment value assumption (SUTVA) is implausible. If we consider the OD status of a household as a binary treatment, it is clear that the potential outcome for a child is likely to be affected by the OD status of other households in their neighborhood, as the amount of fecal matter they are exposed to depends not only on their own household, but their overall environment. Let $Z_i$ denote the treatment to which child $i$ is exposed: treatment $Z_i = 0$ if they live in a household that does not practice OD and $Z_i = 1$ if they do. The potential outcome for child $i$ is then $Y_i(\mathbf{Z}_j)$, where $\mathbf{Z}_j = \{Z_i: i \in village_j\}$. SUTVA allows us to write $Y_i(\mathbf{Z}_j) = Y_i(Z_i)$, but 
+%
+%The OD status of adjacent households can affect a child's potential outcomes, as can the community's overall OD rate, as it may affect water/food quality (?), exposure of the child to fecal matter via their mother and other household members who move through the community.
+%
+%Recent work has considered implications of relaxing SUTVA in experimental contexts (cite that guy who presented this fall?), as well as in network causal inference, where it by definition doesn't hold (cite some network stuff here?). Because our data are a random sample of households in the community and do not include geographic detail beyond anonymized PSU identifiers, we have no way of knowing the geographic adjacencies between households in the community. It's also difficult to think about the causal effect of one specific household changing their OD status on another household, and it's not that interesting. Instead, this study asks about the causal effect of household-level OD at a given community OD level, and about the community-level OD effect for a fixed household OD status. In order to account for the interference present in our data, we follow \cite{hong_raudenbush} and make the identifying assumption that the effect of other households' OD status can be summarized through a scalar function $r(\mathbf{Z}_j)$:
+%\[
+%	Y_i(\mathbf{Z}_j) \equiv Y_i(Z_i, \mathbf{Z}_{-i,j}) = Y_i(Z_i, r(\mathbf{Z}_j)).
+%\]
+%
+%In contrast to \cite{hong_raudenbush}, we do not make the further simplification of setting $r(\mathbf{Z}_j) = 1$ for high-OD communities and $r(\mathbf{Z}_j) = 0$ for low-OD communities. Instead, we allow $r(\mathbf{Z}_j)$ to take on values in $[0, 1]$.
+%
+%Following \cite{hong_raudenbush}, we make three additional assumptions. First, because we would like to generalize our results to the entire population of communities as they currently exist in India and not communities formed by randomly assigning people to live in them, we treat communities as ``intact''. That is, we will estimate average treatment effects conditional on current community membership. Second, we assume there is no interference between communities. While we allow for interference between households in the same community via the GPS, we assume the potential outcomes of children in a given community are independent of treatment assignment of households in other communities. Finally, we assume that treatment assignment at both the household and community levels are (strongly) ignorable conditional on the observed community- and household-level covariates.
+%
+
+\subsection{Generalized propensity score}
+\subsubsection{Framework}
+Methods for generalizing propensity scores for nonbinary treatments have been developed by \cite{imai_vandyk} and \cite{hirano_imbens}. In contrast to the propensity score developed by \cite{rosenbaum_rubin}, which assumes a binary treatment, these generalizations allow for the treatment to be categorical, ordinal, continuous, or even multivariate \citep{imai_vandyk}. We follow the approach of \cite{hirano_imbens} that defines the generalized propensity score and describing its properties for a continuous treatment.
+
+We briefly describe the generalized propensity score (GPS) as developed by \cite{hirano_imbens}, closely following their presentation. We have $N$ units, $i = 1, \ldots, N$, each assigned a treatment $t$ that takes values in $\mathcal{T}$. For a binary treatment, $\mathcal{T} = \{0, 1\}$, but for our purposes we take $\mathcal{T} = [0, 1]$. Our goal is to estimate the average dose-response function (DRF)
+\begin{equation}\label{eq:drf}
+	\mu(t) = \mathbb{E}[Y(t)].
+\end{equation}
+
+In parallel with the binary treatment case, the utility of the GPS depends on several assumptions. First, we assume that treatment is weakly unconfounded conditional on observed covariates $X$, so that
+\[
+	Y(t) ~\perp~ T \mid X \quad \text{for all} ~ t \in \mathcal{T}.
+\]
+Here the term ``weak'' refers to the fact that we do not require joint independence of all potential outcome $\{Y(t)\}_{t \in \mathcal{T}}$. Let $r(t,x) = f_{T \mid X}(t \mid x)$ denote the conditional density of the treatment given the covariates. The GPS is then this conditional density evaluated at the observed values of $T$ and $X$:
+\begin{equation}\label{eq:gps}
+	R = r(T, X).
+\end{equation}
+In practice, the GPS can be estimated with any parametric or nonparametric method. A simple example is a linear regression of $T$ on $X$: $T_i \mid X_i \sim N(\beta_0 + \beta_1^T X_i, \sigma^2)$. Recent studies have explored machine learning approaches like Super Learners \citep{kreif_etal} and boosting \citep{zhu_etal}. However, as \cite{kluve_etal} point out, the primary concern with modeling the GPS is that it achieves adequate covariate balance; just as with the propensity score for a binary treatment, the specific modeling approach is less important than obtaining scores that yield balance on the observed covariates.
+
+As \cite{hirano_imbens} describe, a mechanical property of the GPS endow it with a balancing property, namely that within strata defined by $r(t, X)$, the probability that $T=t$ is independent of $X$: $X ~\perp~ \mathbf{T=t} \mid r(t, X)$. This mechanical property does not require unconfoundedness. However, in conjunction with weak unconfoundedness, this property implies that treatment assignment is unconfounded conditional on the GPS:
+\begin{equation}\label{eq:gps_unconf}
+	Y(t) ~\perp~ T \mid r(t, X).
+\end{equation}
+In other words, we need no longer condition on the (likely high-dimensional) covariate $X$ to achieve unconfoundedness of the treatment; conditioning on the GPS is sufficient.
+
+We can now use the GPS to obtain an unbiased estimate of the DRF $\mu(t)$. The first step is to estimate the conditional expectation of the outcome given the treatment and the GPS,
+\begin{equation}\label{eq:beta}
+	\beta(t,r) = \mathbb{E}[Y \mid T=t, R=r].
+\end{equation}
+This step requires us to specify a model for $Y$ as a function of $T$ and $R$. \cite{hirano_imbens} proposed a linear regression of $Y$ on $T$ and $R$ with  quadratic terms:
+\[
+	Y_i \mid T_i, R_i \sim N(\alpha_0 + \alpha_1 T_i + \alpha_2 T_i^2 + \alpha_3 R_i + \alpha_4 R_i^2 + \alpha_5 T_i R_i, \sigma^2),
+\]
+Of course, more flexible nonparametric models can also be used; recent studies have employed splines \citep{zhu_etal} and Super Learners \citep{kreif_etal}. Whatever the model we choose, the estimation is done using the observed $T_i$ and estimated $\widehat{R}_i = \widehat{r}(T_i, X_i)$ for each individual.  As \cite{hirano_imbens} emphasize, $\beta(t,r)$ does not have a causal interpretation.
+
+The second step is to estimate the DRF itself, $\mu(t) = \mathbb{E}[\beta(t,r)]$, where the expectation is taken over the GPS evaluated at the treatment level of interest $t$ and observed covariates $X$, $r(t, X)$. With an estimate of $\mu(t)$ in hand, we can calculate the causal effect of dose $t$ relative to a baseline or control dose $t^{\prime}$, $\mathbb{E}[Y(t)-Y(t^{\prime})]$, or the marginal treatment effect function $d\mu / dt$. In practice, we estimate $\mu(t)$ as
+\[
+	\widehat{\mu}(t) = \frac{1}{N} \sum_{i=1}^N \beta_i(t, \widehat{r}(t, X_i))
+\]
+
+\subsubsection{Multilevel treatments}
+The main methodological contribution of this study is combining use of the GPS for continuous treatments \citep{hirano_imbens} with the framework that allows us to view an observational study as an approximation of a two-stage experiment \citep{hong_raudenbush}. 
+
+
+
+\subsubsection{Implementation}
+%
+%We have a sample of $i = 1, \ldots, n$ units and a treatment $t$ taking values in the interval $[t_0, t_1]$. The potential outcome for unit $i$, were they to receive treatment $t$, is $Y_i(t)$. In contrast to the case with a binary treatment, where our goal is to estimate the average treatment effect $ATE = \mathbb{E}[Y_i(1) - Y(_i0)]$, our goal here is to estimate the average dose-response function $\mu(t) = \mathbb{E}[Y_i(t)]$. We observe a $p \times 1$ vector of covariates $\mathbf{X}_i$ for each unit $i$, and assume weak unconfoundedness of the potential outcomes and treatment conditional on the covariates:
+%\[
+%	Y(t) \independent T \mid X, \quad \text{for all}~ t \in [t_0, t_1].
+%\]
+%
+%Define $r(t, x)$ to be the conditional density of the treatment at a particular value of the covariate vector:
+%\[
+%	r(t, x) = f_{T \mid X}(t \mid x).
+%\]
+%The GPS is then $R = r(T, X)$. The assumption of weak unconfoundedness above implies that
+%\[
+%	f(t \mid Y(t), \mathbf{X}) = f(t \mid \mathbf{X}) \quad \text{for all}~ t \in [t_0, t_1].
+%\]
+%As \cite{hirano_imbens} show, the GPS is a balancing score in a manner similar to that of the propensity score, and this property combined with unconfoundedness means that treatment assignment is unconfounded given only the GPS:
+%\[
+%	f_T (t \mid Y(t), \mathbf{X}, r(t, \mathbf{X})) = f_T (t \mid Y(t), r(t, \mathbf{X})) = f_T (t \mid r(t, \mathbf{X})).
+%\]
+
+%PSU-level covariates
+%\begin{enumerate}
+%	\item Avg asset ownership
+%	\item Prop HH's with electricity
+%	\item Prop HH's with improved water
+%	\item Prop HH's Muslim
+%	\item Prop institutional delivery
+%	\item Prop w/ health card
+%	\item Prop w/ mother literate
+%	\item Prop w/ child ever vaccinated
+%\end{enumerate}
+
+
+
+%Outline
+%\begin{itemize}
+%	\item Approximation of an observational study as a two-stage randomized experiment
+%	\item Continuous treatment on the PSU level -- apply Imai/van Dyk and/or Hirano/Imbens methods for dealing with generalized propensity scores to estimate the PSU-level generalized propensity score
+%	\item Multilevel observational study
+%\end{itemize}
+
+%\section*{Data}
+%The data we use come from the first three rounds of the National Family Health Survey (NFHS), a household survey designed to yield estimates of important indicators of maternal and child health for all 29 Indian states by rural/urban residence. The three rounds took place in 1992-1993, 1998-1999, and 2005-2006. We use the household questionnaire to determine whether the household practices open defecation, other important household characteristics (asset ownership, access to an improved water source, electricity, housing material), and also to calculate PSU-level OD rates. Our outcome is an age-and-sex-standardized measure of height-for-age for children born in the three years prior to the survey. We have data on a total of XXX children over the three survey rounds.
+
+%; a fourth round was completed in 2015-2016, but those data are yet to be made public. The NFHS uses a multi-stage sampling design, with samples drawn separately in rural and urban areas. In rural areas, villages are the primary sampling units (PSUs), and are sampled with probability proportional to size (PPS). A simple random sample of households is then taken in the sampled villages. In urban areas, the PSUs are census wards, which are sampled using PPS sampling. A PPS sample of census enumeration blocks is taken in the selected wards, followed by a simple random sample of households in the selected census enumeration blocks.
+
+%The NFHS includes multiple questionnaires. We use the household questionnaire, administered to the head of the household, and the women's questionnaire, administered to eligible women of reproductive age. Eligibility has varied across the three rounds, so we use data collected for ever-married women ages 15-49, a group that is considered eligible in each round. The women's questionnaire includes detailed information on the children born in the last several years prior to the survey, including vaccination history, nutritional status, recent illnesses, and anthropometry measurements. Because the 
+
+
+
+%- NFHS1-3
+%- DLHS???
+%- 
+%
+%We can't use \% Muslim as in IV the way Spears et al did, because when we plot various indicators (\% with improved water, \% with latrine, \% asset ownership, \% with electricity) against \% Muslim, we do NOT see the same pattern they did. This is probably because we separate the plots by survey round, while they combine them. This holds even when we exclude PSUs with 0\% and 100\% Muslim populations. So it does not seem to hold that \% Muslim is correlated with predictors of worse child health, except for sanitation.
+%
+%In this case, we need another way of getting at the causal effect of neighborhood sanitation. One thing we could do is match children with similar household/mother/child characteristics across PSUs with different sanitation levels. This would help approximate the randomized experiment where otherwise similar children/households are randomly assigned to different levels of sanitation. The key would be to be able to find suitable matches -- 
+%
+%
+%Suppose we were only interested in estimating the household-level effect of sanitation. Then we could estimate the propensity score for having a toilet and match on this propensity score. I guess here could just ignore the neighborhood effect?
+%
+%Notation. Let $i$ index households, $j$ index PSUs, $t$ index survey round. $T_{ijt}$ is a binary treatment variable denoting whether household $i$ in PSU $j$ in survey round $t$ practices OD. The outcome is $Y_{ijt}$, the height-for-age $z$-score for a child (here we ignore the fact that children are actually nested in households). If matching on $e(x) = Pr(T_{ijt} = 1 \mid X_{ijt} = x)$ sufficiently balances potential confounders $X_{ijt}$ between treatment and control groups, then we can be more confident that our estimates of treatment effect are unbiased.
+
+
+%
+%\begin{itemize}
+%	\item Pair matching PSUs that are far apart in terms of prop Muslim -- ``stronger'' IV?
+%	\item OR pair-matching kids with different HH sanitation status across similar prop Muslim/prop OD PSUs -- this could get at the HH-leve effect?
+%	\item Can we somehow formulate this as an observational version of the Imai et al matched-pair cluster-randomization idea?
+%\end{itemize}
+%
+%Suppose sanitation level were randomly assigned across clusters. Then, we could estimate the causal effect of cluster-level sanitation on individual children. 
+%
+%We match children in households that practice OD with children in households that do not. We exactly match for NFHS round, state, rural/urban, whether the household has an improved water source, the religion of the household head (Hindu/Muslim/Other), and whether the mother is literate. We also balance the means of the proportion of the nine assets that a household has, whether the mother lives with her in-laws, and the age of the mother at the time of the interview.
+
+
+
+\section{Results}
+
+\section{Discussion}
+\subsection{Limitations}
+One limitation of the present study is that we have ignored the clustering of children within households, thus implicitly treating children in the same community as independent. Children within the same household are likely to be more similar than children in different households, so if the data for a community has many children clustered in only a few households, they are less informative than they would be for a community with the same number of children with one child per household. However, X\% of the children in our data belong to unique households, Y\% 
+
+We also do not know the geographic size of the PSUs. While the DHS manual tells us that urban PSUs are generally census enumeration blocks (roughly the size of XXX) and rural PSUs are villages of 500 or fewer households, there is likely to be variation in the geographic size and population density of the PSUs. In that case, our results are likely to be lower bounds, as the sample size in each community is roughly XX\% (interquartile range XX\% to XX\%). A recent study using both cross-national data from 172 countries and subnational data from Bangladesh suggests that the negative effects of neighborhood-level open defecation are magnified by high population density \citep{hathi2017}. However, an epidemiological study in Guatemala did not find that population density was an important determinant of intestinal infections or a strong effect modifier for household-level sanitation \citep{guatemala}, so evidence remains mixed.
 
 \bibliography{sanitation}
 

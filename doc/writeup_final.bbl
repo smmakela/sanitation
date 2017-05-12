@@ -1,0 +1,162 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Case and Paxson(2006)]{case_paxson}
+A.~Case and C.~Paxson.
+\newblock Stature and status: Height, ability, and labor market outcomes.
+\newblock Working Paper 12466, National Bureau of Economic Research, August
+  2006.
+\newblock URL \url{http://www.nber.org/papers/w12466}.
+
+\bibitem[Coffey et~al.(2014)Coffey, Gupta, Hathi, Khurana, Spears, Srivastav, ,
+  and Vyas]{squat}
+D.~Coffey, A.~Gupta, P.~Hathi, N.~Khurana, D.~Spears, N.~Srivastav, , and
+  S.~Vyas.
+\newblock Revealed preference for open defecation: evidence from a new survey
+  in rural north india.
+\newblock Working Paper~1, {research institute for compassionate economics},
+  June 2014.
+\newblock URL
+  \url{http://riceinstitute.org/research/revealed-preference-for-open-defecation-evidence-from-a-new-survey-in-rural-north-india-longer-working-paper/}.
+
+\bibitem[Coffey et~al.(2015)Coffey, Gupta, Hathi, Spears, Srivastav, and
+  Vyas]{san_culture}
+D.~Coffey, A.~Gupta, P.~Hathi, D.~Spears, N.~Srivastav, and S.~Vyas.
+\newblock Culture and health transition: Understanding sanitation behaviour in
+  rural north india.
+\newblock Working paper, International Growth Centre, April 2015.
+\newblock URL
+  \url{http://www.theigc.org/wp-content/uploads/2015/04/Coffey-et-al-2015-Working-Paper.pdf}.
+
+\bibitem[Hammer and Spears(2016)]{village_san}
+J.~Hammer and D.~Spears.
+\newblock Village sanitation and child health: Effects and external validity in
+  a randomized field experiment in rural india.
+\newblock \emph{Journal of Health Economics}, 48\penalty0 (C):\penalty0
+  135--148, 2016.
+\newblock URL
+  \url{http://EconPapers.repec.org/RePEc:eee:jhecon:v:48:y:2016:i:c:p:135-148}.
+
+\bibitem[Hathi et~al.(2017)Hathi, Haque, Pant, Coffey, and Spears]{hathi2017}
+P.~Hathi, S.~Haque, L.~Pant, D.~Coffey, and D.~Spears.
+\newblock Place and child health: The interaction of population density and
+  sanitation in developing countries.
+\newblock \emph{Demography}, 54\penalty0 (1):\penalty0 337--360, 2017.
+\newblock ISSN 1533-7790.
+\newblock \doi{10.1007/s13524-016-0538-y}.
+\newblock URL \url{http://dx.doi.org/10.1007/s13524-016-0538-y}.
+
+\bibitem[Hirano and Imbens(2005)]{hirano_imbens}
+K.~Hirano and G.~W. Imbens.
+\newblock \emph{The Propensity Score with Continuous Treatments}, pages 73--84.
+\newblock John Wiley \& Sons, Ltd, 2005.
+\newblock ISBN 9780470090459.
+\newblock \doi{10.1002/0470090456.ch7}.
+\newblock URL \url{http://dx.doi.org/10.1002/0470090456.ch7}.
+
+\bibitem[Hong and Raudenbush(2006)]{hong_raudenbush}
+G.~Hong and S.~W. Raudenbush.
+\newblock Evaluating kindergarten retention policy.
+\newblock \emph{Journal of the American Statistical Association}, 101\penalty0
+  (475):\penalty0 901--910, 2006.
+\newblock \doi{10.1198/016214506000000447}.
+\newblock URL \url{http://dx.doi.org/10.1198/016214506000000447}.
+
+\bibitem[Jarquin et~al.(2016)Jarquin, Arnold, Muñoz, Lopez, Cuéllar,
+  Thornton, Patel, Reyes, Roy, Bryan, McCracken, and Colford]{guatemala}
+C.~Jarquin, B.~F. Arnold, F.~Muñoz, B.~Lopez, V.~M. Cuéllar, A.~Thornton,
+  J.~Patel, L.~Reyes, S.~L. Roy, J.~P. Bryan, J.~P. McCracken, and J.~M.
+  Colford.
+\newblock Population density, poor sanitation, and enteric infections in nueva
+  santa rosa, guatemala.
+\newblock \emph{The American Journal of Tropical Medicine and Hygiene},
+  94\penalty0 (4):\penalty0 912--919, 2016.
+\newblock \doi{https://doi.org/10.4269/ajtmh.15-0555}.
+\newblock URL
+  \url{http://www.ajtmh.org/content/journals/10.4269/ajtmh.15-0555}.
+
+\bibitem[JH(1999)]{humphrey}
+H.~JH.
+\newblock {C}hild undernutrition, tropical enteropathy, toilets, and
+  handwashing.
+\newblock \emph{Lancet}, 374\penalty0 (9694):\penalty0 1032–1035, September
+  1999.
+
+\bibitem[Jousilahti et~al.(2000)Jousilahti, Tuomilehto, Vartiainen, Eriksson,
+  and Puska]{jousilahti}
+P.~Jousilahti, J.~Tuomilehto, E.~Vartiainen, J.~Eriksson, and P.~Puska.
+\newblock Relation of adult height to cmause-specific and total mortality: a
+  prospective follow-up study of 31,199 middle-aged men and women in finland.
+\newblock \emph{American Journal of Epidemiology}, 151\penalty0 (11):\penalty0
+  1112--1120, 2000.
+
+\bibitem[{National Family Health Survey-4}(2016)]{nfhs4_factsheet}
+{National Family Health Survey-4}.
+\newblock India fact sheet, 2016.
+\newblock URL \url{http://rchiips.org/NFHS/pdf/NFHS4/India.pdf}.
+
+\bibitem[Roy and Acharya(2016)]{roy_acharya}
+T.~Roy and R.~Acharya.
+\newblock \emph{Statistical Survey Design and Evaluating Impact}.
+\newblock Cambridge University Press, 2016.
+\newblock ISBN 9781107146457.
+\newblock URL \url{https://books.google.com/books?id=re4UjwEACAAJ}.
+
+\bibitem[Rubin(1978)]{rubin1978}
+D.~B. Rubin.
+\newblock Bayesian inference for causal effects: The role of randomization.
+\newblock \emph{Ann. Statist.}, 6\penalty0 (1):\penalty0 34--58, 01 1978.
+\newblock \doi{10.1214/aos/1176344064}.
+\newblock URL \url{http://dx.doi.org/10.1214/aos/1176344064}.
+
+\bibitem[Rubin(1986)]{rubin1986}
+D.~B. Rubin.
+\newblock Statistics and causal inference: Comment: Which ifs have causal
+  answers.
+\newblock \emph{Journal of the American Statistical Association}, 81\penalty0
+  (396):\penalty0 961--962, 1986.
+
+\bibitem[Spears(2012)]{spears2012}
+D.~Spears.
+\newblock Height and cognitive achievement among indian children.
+\newblock \emph{Economics \& Human Biology}, 10\penalty0 (2):\penalty0
+  210--219, 2012.
+\newblock URL
+  \url{http://EconPapers.repec.org/RePEc:eee:ehbiol:v:10:y:2012:i:2:p:210-219}.
+
+\bibitem[Spears(2013)]{spears_intl_variation}
+D.~Spears.
+\newblock How much international variation in child height can sanitation
+  explain?
+\newblock Policy Research Working Paper Series 6351, The World Bank, 2013.
+\newblock URL
+  \url{http://elibrary.worldbank.org/doi/abs/10.1596/1813-9450-6351}.
+
+\bibitem[Spears et~al.(2013)Spears, Ghosh, and Cumming]{ecological}
+D.~Spears, A.~Ghosh, and O.~Cumming.
+\newblock Open defecation and childhood stunting in india: An ecological
+  analysis of new data from 112 districts.
+\newblock \emph{PLOS ONE}, 8\penalty0 (9), 09 2013.
+\newblock \doi{10.1371/journal.pone.0073784}.
+\newblock URL \url{https://doi.org/10.1371/journal.pone.0073784}.
+
+\bibitem[Vogl(2012)]{vogl}
+T.~Vogl.
+\newblock Height, skills, and labor market outcomes in mexico.
+\newblock Working Paper 18318, National Bureau of Economic Research, August
+  2012.
+\newblock URL \url{http://www.nber.org/papers/w18318}.
+
+\bibitem[{WHO/UNICEF JMP}(2015)]{jmp_2015}
+{WHO/UNICEF JMP}.
+\newblock Progress on sanitation and drinking water access -- 2015 update and
+  mdg assessment.
+\newblock Technical report, {WHO/UNICEF Joint Monitoring Programme for Water
+  Supply and Sanitation}, 2015.
+\newblock URL \url{https://www.wssinfo.org}.
+
+\end{thebibliography}

@@ -1,0 +1,20 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{setspace}
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\onehalfspacing
+\author{Susanna Makela}
+\title{Reading Response}
+\onehalfspacing
+\begin{document}
+\maketitle
+
+This week's reading was on propensity scores and subclassification. One alternative to subclassification on the propensity score that is presented in the chapter is to weight the observed responses by the propensity score. Specifically, observed responses are weighted by $1/e(X_i)$ for treated units and $1/(1-e(X_i))$ for control units, and the treatment effect is estimated by
+. If we knew the true propensity scores, this method would give an unbiased estimate of the treatment effect, but since this rarely happens in practice, we instead use the estimated propensity score. If the propensity scores are estimated poorly or are highly variable, the Horvitz-Thompson estimator can have high variance and bias.
+
+In reading about weighting with propensity scores and the Horvitz-Thompson estimator, I started thinking about the connection to Horvitz-Thompson estimators as used in the survey literature.
+
+\end{document}

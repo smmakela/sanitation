@@ -1,0 +1,183 @@
+\begin{thebibliography}{21}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Dandona et~al.(2016)Dandona, Pandey, and Dandona]{dandona}
+R.~Dandona, A.~Pandey, and L.~Dandona.
+\newblock A review of national health surveys in india.
+\newblock \emph{Bulletin of the World Health Organization}, 94\penalty0
+  (4):\penalty0 286--296A, 2016.
+\newblock \doi{10.2471/BLT.15.158493}.
+\newblock URL \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4794301/}.
+
+\bibitem[Geruso and Spears(2015)]{geruso_spears}
+M.~Geruso and D.~Spears.
+\newblock Neighborhood sanitation and infant mortality.
+\newblock Technical report, research institute for compassionate economics,
+  2015.
+\newblock URL \url{http://ssrn.com/abstract=2605479}.
+
+\bibitem[Hammer and Spears(2016)]{village_san}
+J.~Hammer and D.~Spears.
+\newblock Village sanitation and child health: Effects and external validity in
+  a randomized field experiment in rural india.
+\newblock \emph{Journal of Health Economics}, 48\penalty0 (C):\penalty0
+  135--148, 2016.
+\newblock URL
+  \url{http://EconPapers.repec.org/RePEc:eee:jhecon:v:48:y:2016:i:c:p:135-148}.
+
+\bibitem[Hathi et~al.(2017)Hathi, Haque, Pant, Coffey, and Spears]{hathi2017}
+P.~Hathi, S.~Haque, L.~Pant, D.~Coffey, and D.~Spears.
+\newblock Place and child health: The interaction of population density and
+  sanitation in developing countries.
+\newblock \emph{Demography}, 54\penalty0 (1):\penalty0 337--360, 2017.
+\newblock ISSN 1533-7790.
+\newblock \doi{10.1007/s13524-016-0538-y}.
+\newblock URL \url{http://dx.doi.org/10.1007/s13524-016-0538-y}.
+
+\bibitem[Hirano and Imbens(2005)]{hirano_imbens}
+K.~Hirano and G.~W. Imbens.
+\newblock \emph{The Propensity Score with Continuous Treatments}, pages 73--84.
+\newblock John Wiley \& Sons, Ltd, 2005.
+\newblock ISBN 9780470090459.
+\newblock \doi{10.1002/0470090456.ch7}.
+\newblock URL \url{http://dx.doi.org/10.1002/0470090456.ch7}.
+
+\bibitem[Hong and Raudenbush(2006)]{hong_raudenbush}
+G.~Hong and S.~W. Raudenbush.
+\newblock Evaluating kindergarten retention policy.
+\newblock \emph{Journal of the American Statistical Association}, 101\penalty0
+  (475):\penalty0 901--910, 2006.
+\newblock \doi{10.1198/016214506000000447}.
+\newblock URL \url{http://dx.doi.org/10.1198/016214506000000447}.
+
+\bibitem[Imai and van Dyk(2004)]{imai_vandyk}
+K.~Imai and D.~A. van Dyk.
+\newblock Causal inference with general treatment regimes.
+\newblock \emph{Journal of the American Statistical Association}, 99\penalty0
+  (467):\penalty0 854--866, 2004.
+\newblock \doi{10.1198/016214504000001187}.
+\newblock URL \url{http://dx.doi.org/10.1198/016214504000001187}.
+
+\bibitem[Jarquin et~al.(2016)Jarquin, Arnold, Muñoz, Lopez, Cuéllar,
+  Thornton, Patel, Reyes, Roy, Bryan, McCracken, and Colford]{guatemala}
+C.~Jarquin, B.~F. Arnold, F.~Muñoz, B.~Lopez, V.~M. Cuéllar, A.~Thornton,
+  J.~Patel, L.~Reyes, S.~L. Roy, J.~P. Bryan, J.~P. McCracken, and J.~M.
+  Colford.
+\newblock Population density, poor sanitation, and enteric infections in nueva
+  santa rosa, guatemala.
+\newblock \emph{The American Journal of Tropical Medicine and Hygiene},
+  94\penalty0 (4):\penalty0 912--919, 2016.
+\newblock \doi{https://doi.org/10.4269/ajtmh.15-0555}.
+\newblock URL
+  \url{http://www.ajtmh.org/content/journals/10.4269/ajtmh.15-0555}.
+
+\bibitem[Kluve et~al.(2012)Kluve, Schneider, Uhlendorff, and Zhao]{kluve_etal}
+J.~Kluve, H.~Schneider, A.~Uhlendorff, and Z.~Zhao.
+\newblock Evaluating continuous training programmes by using the generalized
+  propensity score.
+\newblock \emph{Journal of the Royal Statistical Society: Series A (Statistics
+  in Society)}, 175\penalty0 (2):\penalty0 587--617, 2012.
+\newblock ISSN 1467-985X.
+\newblock \doi{10.1111/j.1467-985X.2011.01000.x}.
+\newblock URL \url{http://dx.doi.org/10.1111/j.1467-985X.2011.01000.x}.
+
+\bibitem[Kreif et~al.(2015)Kreif, Grieve, Díaz, and Harrison]{kreif_etal}
+N.~Kreif, R.~Grieve, I.~Díaz, and D.~Harrison.
+\newblock Evaluation of the effect of a continuous treatment: A machine
+  learning approach with an application to treatment for traumatic brain
+  injury.
+\newblock \emph{Health Economics}, 24\penalty0 (9):\penalty0 1213--1228, 2015.
+\newblock ISSN 1099-1050.
+\newblock \doi{10.1002/hec.3189}.
+\newblock URL \url{http://dx.doi.org/10.1002/hec.3189}.
+
+\bibitem[{National Family Health Survey-4, 2015-2016}(2016)]{nfhs4_factsheet}
+{National Family Health Survey-4, 2015-2016}.
+\newblock India fact sheet, 2016.
+\newblock URL \url{http://rchiips.org/NFHS/pdf/NFHS4/India.pdf}.
+
+\bibitem[Rosenbaum and Rubin(1983)]{rosenbaum_rubin}
+P.~R. Rosenbaum and D.~B. Rubin.
+\newblock The central role of the propensity score in observational studies for
+  causal effects.
+\newblock \emph{Biometrika}, 70\penalty0 (1):\penalty0 41--55, 1983.
+\newblock ISSN 00063444.
+\newblock URL \url{http://www.jstor.org/stable/2335942}.
+
+\bibitem[Roy and Acharya(2016)]{roy_acharya}
+T.~Roy and R.~Acharya.
+\newblock \emph{Statistical Survey Design and Evaluating Impact}.
+\newblock Cambridge University Press, 2016.
+\newblock ISBN 9781107146457.
+\newblock URL \url{https://books.google.com/books?id=re4UjwEACAAJ}.
+
+\bibitem[Rubin(1978)]{rubin1978}
+D.~B. Rubin.
+\newblock Bayesian inference for causal effects: The role of randomization.
+\newblock \emph{Ann. Statist.}, 6\penalty0 (1):\penalty0 34--58, 01 1978.
+\newblock \doi{10.1214/aos/1176344064}.
+\newblock URL \url{http://dx.doi.org/10.1214/aos/1176344064}.
+
+\bibitem[Rubin(1986)]{rubin1986}
+D.~B. Rubin.
+\newblock Statistics and causal inference: Comment: Which ifs have causal
+  answers.
+\newblock \emph{Journal of the American Statistical Association}, 81\penalty0
+  (396):\penalty0 961--962, 1986.
+
+\bibitem[Spears(2012)]{spears_tsc}
+D.~Spears.
+\newblock Effects of rural sanitation on infant mortality and human capital:
+  evidence from india’s total sanitation campaign.
+\newblock Technical report, {research institute for compassionate economics},
+  2012.
+\newblock URL
+  \url{http://riceinstitute.org/wordpress/wp-content/uploads/downloads/2012/07/tsc-summer-2012.pdf}.
+
+\bibitem[Spears(2013)]{spears_intl_variation}
+D.~Spears.
+\newblock How much international variation in child height can sanitation
+  explain?
+\newblock Policy Research Working Paper Series 6351, The World Bank, 2013.
+\newblock URL
+  \url{http://elibrary.worldbank.org/doi/abs/10.1596/1813-9450-6351}.
+
+\bibitem[Spears et~al.(2013{\natexlab{a}})Spears, Ghosh, and
+  Cumming]{ecological}
+D.~Spears, A.~Ghosh, and O.~Cumming.
+\newblock Open defecation and childhood stunting in india: An ecological
+  analysis of new data from 112 districts.
+\newblock \emph{PLOS ONE}, 8\penalty0 (9), 09 2013{\natexlab{a}}.
+\newblock \doi{10.1371/journal.pone.0073784}.
+\newblock URL \url{https://doi.org/10.1371/journal.pone.0073784}.
+
+\bibitem[Spears et~al.(2013{\natexlab{b}})Spears, Ghosh, and
+  Cumming]{spears_ecological}
+D.~Spears, A.~Ghosh, and O.~Cumming.
+\newblock Open defecation and childhood stunting in india: an ecological
+  analysis of new data from 112 districts.
+\newblock \emph{PLoS One}, 8\penalty0 (9):\penalty0 e73784, 2013{\natexlab{b}}.
+
+\bibitem[{WHO/UNICEF JMP}(2015)]{jmp_2015}
+{WHO/UNICEF JMP}.
+\newblock Progress on sanitation and drinking water access -- 2015 update and
+  mdg assessment.
+\newblock Technical report, {WHO/UNICEF Joint Monitoring Programme for Water
+  Supply and Sanitation}, 2015.
+\newblock URL \url{https://www.wssinfo.org}.
+
+\bibitem[Zhu et~al.(2015)Zhu, Coffman, and Ghosh]{zhu_etal}
+Y.~Zhu, D.~L. Coffman, and D.~Ghosh.
+\newblock A boosting algorithm for estimating generalized propensity scores
+  with continuous treatments.
+\newblock \emph{Journal of Causal Inference}, 3\penalty0 (1):\penalty0 25--40,
+  2015.
+\newblock ISSN 2193-3677.
+\newblock \doi{10.1515/jci-2014-0022}.
+\newblock URL \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4749263/}.
+
+\end{thebibliography}

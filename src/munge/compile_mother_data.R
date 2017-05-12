@@ -19,6 +19,14 @@ nfhsdir <- "/Users/susanna/Documents/NFHS/"
 nfhs1 <- read.dta(paste0(nfhsdir, "/NFHS1/iair23dt/IAIR23FL.dta"),
                   convert.factors = FALSE)
 
+# Check for duplicate entries
+nfhs1 %>%
+  dplyr::group_by(caseid) %>%
+  dplyr::summarise(num.obs = n()) %>%
+  dplyr::filter(num.obs > 1) -> dupcheck
+nrow(dupcheck)
+table(dupcheck$num.obs)
+
 # Mother's age at interview
 nfhs1$mom.age.mos.interview <- nfhs1$v008 - nfhs1$v011
 
@@ -31,6 +39,9 @@ nfhs1$mom.edu.years <- nfhs1$v107
 # whether mother can read
 nfhs1$mom.literate <- as.numeric(nfhs1$s108 == 1)
 nfhs1$mom.literate[nfhs1$s108 == 9 | is.na(nfhs1$s108)] <- NA
+
+# Mother ever-married (NFHS1 only interviewed ever-married women)
+nfhs1$mom.evermarried <- 1
 
 # Mother has own money (not in NFHS1)
 nfhs1$mom.own.money <- NA
@@ -53,14 +64,16 @@ nfhs1 <- left_join(nfhs1, state.map, by = "v024")
 
 # Keep just the variables we need
 nfhs1 %>%
-  dplyr::select(caseid, v002, v003, v005, v006, v007, v008, v009, v010, v011,
-                v012, v021, v024, v025, mom.age.mos.interview, mom.height.cm,
-                mom.edu.level, mom.edu.years, mom.literate, mom.own.money,
-                mom.healthcare.say, mom.lives.with.inlaws, state.name) %>%
+  dplyr::select(caseid, v001, v002, v003, v005, v006, v007, v008, v009, v010, v011,
+                v012, v024, v025, mom.age.mos.interview, mom.height.cm,
+                mom.edu.level, mom.edu.years, mom.evermarried, mom.literate,
+                mom.own.money, mom.healthcare.say, mom.lives.with.inlaws,
+                state.name) %>%
   dplyr::rename(mom.caseid = caseid,
+                psu.id = v001,
                 hh.id = v002,
                 mom.id = v003,
-                sample.wt = v005,
+                mom.sample.wt = v005,
                 interview.mo = v006,
                 interview.yr = v007,
                 interview.cmc = v008,
@@ -68,9 +81,8 @@ nfhs1 %>%
                 mom.birth.yr = v010,
                 mom.birth.cmc = v011,
                 mom.curr.age.yrs = v012,
-                psu.id = v021,
                 state = v024,
-                urban = v025) %>%
+                rural.urban = v025) %>%
   dplyr::mutate(round = "NFHS1")  -> nfhs1
 
 # ##############################################################################
@@ -84,6 +96,9 @@ nfhs2$mom.age.mos.interview <- nfhs2$v008 - nfhs2$v011
 
 # Mother's height in cm
 nfhs2$mom.height.cm <- nfhs2$v438/10
+
+# Mother ever-married (NFHS2 only interviewed ever-married women)
+nfhs2$mom.evermarried <- 1
 
 # Mother's education level and years, literacy
 nfhs2$mom.edu.level <- nfhs2$v106
@@ -113,14 +128,16 @@ nfhs2 <- left_join(nfhs2, state.map, by = "v024")
 
 # Keep just the variables we need
 nfhs2 %>%
-  dplyr::select(caseid, v002, v003, v005, v006, v007, v008, v009, v010, v011,
-                v012, v021, v024, v025, mom.age.mos.interview, mom.height.cm,
-                mom.edu.level, mom.edu.years, mom.literate, mom.own.money,
-                mom.healthcare.say, mom.lives.with.inlaws, state.name) %>%
+  dplyr::select(caseid, v001, v002, v003, v005, v006, v007, v008, v009, v010, v011,
+                v012, v024, v025, mom.age.mos.interview, mom.height.cm,
+                mom.edu.level, mom.edu.years, mom.evermarried, mom.literate,
+                mom.own.money, mom.healthcare.say, mom.lives.with.inlaws,
+                state.name) %>%
   dplyr::rename(mom.caseid = caseid,
+                psu.id = v001,
                 hh.id = v002,
                 mom.id = v003,
-                sample.wt = v005,
+                mom.sample.wt = v005,
                 interview.mo = v006,
                 interview.yr = v007,
                 interview.cmc = v008,
@@ -128,9 +145,8 @@ nfhs2 %>%
                 mom.birth.yr = v010,
                 mom.birth.cmc = v011,
                 mom.curr.age.yrs = v012,
-                psu.id = v021,
                 state = v024,
-                urban = v025) %>%
+                rural.urban = v025) %>%
   dplyr::mutate(round = "NFHS2")  -> nfhs2
 
 # ##############################################################################
@@ -153,6 +169,11 @@ nfhs3$mom.literate <- as.numeric(nfhs3$v155 == 1 | nfhs3$v155 == 2)
 # missings for "no card w/ required language", "blind/visually impaired",
 # and "missing"
 nfhs3$mom.literate[nfhs3$v155 == 3 | nfhs3$v155 == 4 | nfhs3$v155 == 9] <- NA
+
+# Mother ever-married (v502 is never/currently/formerly married)
+nfhs3$mom.evermarried <- NA
+nfhs3$mom.evermarried[nfhs3$v502 == 0] <- 0
+nfhs3$mom.evermarried[nfhs3$v502 >= 1] <- 1
 
 # Mother has own money
 nfhs3$mom.own.money <- nfhs3$w124
@@ -179,14 +200,16 @@ nfhs3 <- left_join(nfhs3, state.map, by = "v024")
 
 # Keep just the variables we need
 nfhs3 %>%
-  dplyr::select(caseid, v002, v003, v005, v006, v007, v008, v009, v010, v011,
-                v012, v021, v024, v025, mom.age.mos.interview, mom.height.cm,
-                mom.edu.level, mom.edu.years, mom.literate, mom.own.money,
-                mom.healthcare.say, mom.lives.with.inlaws, state.name) %>%
+  dplyr::select(caseid, v001, v002, v003, v005, v006, v007, v008, v009, v010, v011,
+                v012, v024, v025, mom.age.mos.interview, mom.height.cm,
+                mom.edu.level, mom.edu.years, mom.literate, mom.evermarried,
+                mom.own.money, mom.healthcare.say, mom.lives.with.inlaws,
+                state.name) %>%
   dplyr::rename(mom.caseid = caseid,
+                psu.id = v001,
                 hh.id = v002,
                 mom.id = v003,
-                sample.wt = v005,
+                mom.sample.wt = v005,
                 interview.mo = v006,
                 interview.yr = v007,
                 interview.cmc = v008,
@@ -194,12 +217,35 @@ nfhs3 %>%
                 mom.birth.yr = v010,
                 mom.birth.cmc = v011,
                 mom.curr.age.yrs = v012,
-                psu.id = v021,
                 state = v024,
-                urban = v025) %>%
+                rural.urban = v025) %>%
   dplyr::mutate(round = "NFHS3") -> nfhs3
 
 # ##############################################################################
 # Combine all rounds
 # ##############################################################################
 nfhs <- rbind(nfhs1, nfhs2, nfhs3)
+saveRDS(nfhs, "/Users/susanna/projects/sanitation/data/nfhs/mother_data.rds")
+
+# Replace implausible values of mom height (multiplied by 10) with NA
+# 100 cm = 39 in = 3ft 3 in
+# 220 cm = 87 in = 7ft 3 in
+nfhs <- dplyr::mutate(nfhs, mom.height.cm = ifelse(mom.height.cm >= 100*10 &
+                                                     mom.height.cm <= 220*10,
+                                                   mom.height.cm, NA))
+
+# Calculate PSU-level characteristics -- prop of mothers who are literate,
+# prop mothers who live with in-laws, prop mothers with own money
+mother_psu_data <- nfhs %>%
+  dplyr::group_by(round, state.name, psu.id) %>%
+  dplyr::summarise(prop_mom_literate = mean(mom.literate, na.rm = TRUE),
+                   prop_mom_inlaws = mean(mom.lives.with.inlaws, na.rm = TRUE),
+                   prop_mom_money = mean(mom.own.money, na.rm = TRUE),
+                   ss_mom_literate = sum(!is.na(mom.literate)),
+                   ss_mom_inlaws = sum(!is.na(mom.lives.with.inlaws)),
+                   ss_mom_money = sum(!is.na(mom.own.money)))
+
+saveRDS(mother_psu_data,
+        "/Users/susanna/projects/sanitation/data/nfhs/mother_psu_data.rds")
+
+

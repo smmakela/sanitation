@@ -1,0 +1,18 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Susanna Makela}
+\title{Simulation}
+\begin{document}
+
+\maketitle
+
+\section*{Simulation}
+We base our simulated cluster sizes on the true population sizes used in the Fragile Families sampling frame. The FF sampling frame consisted of 77 cities (clusters), but we'd like to generate a population with 1000 clusters. We therefore fit a gamma distribution to the logarithm of the observed city sizes, and then drew 1000 cluster sizes from a gamma distribution using the estimated parameters. Figure XX shows the distribution of cluster sizes in FF and in our simulated data.
+
+\end{document}

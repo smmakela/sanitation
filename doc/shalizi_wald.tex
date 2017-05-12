@@ -1,0 +1,118 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Susanna Makela}
+\title{Notes from class on 3/22/17}
+\date{}
+\begin{document}
+
+\maketitle
+
+\section*{Shalizi and the Wald Estimator}
+Here is a quick derivation of the Wald estimator in the case of a binary instrument and binary treatment, starting from Shalizi's IV equation:
+\begin{equation}\label{eq:shalizi}
+	p(y \mid do(z)) = \sum_d p(y \mid do(d)) \cdot p(d \mid do(z)).
+\end{equation}
+
+From this, we can clearly write
+\[
+	\mathbb{E}[y \mid do(z)] = \sum_d \mathbb{E}[y \mid do(d)] \cdot p(d \mid do(z))
+\]
+%\begin{align*}
+%	\mathbb{E}[y \mid do(z)] &= \int y \cdot p(y \mid do(z)) \text{d}y \\
+%	&= \int y \sum_d p(y \mid do(d)) \cdot p(d \mid do(z)) \text{d}y \\
+%	&= \sum_d \int y \cdot p(y \mid do(d)) \text{d}y \cdot p(d \mid do(z)) \\
+%	&= \sum_d \mathbb{E}[y \mid do(d)] \cdot p(d \mid do(z))
+%\end{align*}
+
+
+In the case where $z=1$, we get
+\begin{align*}
+	\mathbb{E}[y \mid do(z = 1)] &= \mathbb{E}[y \mid do(d = 1)] \cdot p(d = 1 \mid do(z = 1)) + \mathbb{E}[y \mid do(d = 0)] \cdot p(d = 0 \mid do(z = 1)) \\
+	&= \mathbb{E}[y \mid do(d = 1)] \cdot \mathbb{E}[d \mid do(z = 1)] + \mathbb{E}[y \mid do(d = 0)] \left( 1 - \mathbb{E}[d \mid do(z = 1)] \right) \\
+	&= \mathbb{E}[y \mid do(d = 0]) + \mathbb{E}[d \mid do(z = 1)] \left( \mathbb{E}[y \mid do(d = 1)] - \mathbb{E}[y \mid do(d = 0)] \right),
+%	p(y \mid do(z = 1)) &= p(y \mid do(d = 1)) \cdot p(d = 1 \mid do(z = 1)) + p(y \mid do(d = 0)) \cdot p(d = 0 \mid do(z = 1)) \\
+%	&= p(y \mid do(d = 1)) \cdot \mathbb{E}[d \mid do(z = 1)] + p(y \mid do(d = 0)) \left( 1 - \mathbb{E}[d \mid do(z = 1)] \right) \\
+%	&= p(y \mid do(d = 0)) + \mathbb{E}[d \mid do(z = 1)] \left( p(y \mid do(d = 1)) - p(y \mid do(d = 0)) \right),
+\end{align*}
+where we use the fact that $p(d = 1 \mid do(z = 1)) = \mathbb{E}[d \mid do(z = 1)]$ since $d$ is binary. Solving for $\mathbb{E}[y \mid do(d = 0)]$, we see that
+\begin{equation}\label{eq:pt1}
+	\mathbb{E}[y \mid do(d = 0)] = \mathbb{E}[y \mid do(z = 1)] - \mathbb{E}[d \mid do(z = 1)] \left( \mathbb{E}[y \mid do(d = 1)] - \mathbb{E}[y \mid do(d = 0)] \right).
+%	p(y \mid do(d = 0)) = p(y \mid do(z = 1)) - \mathbb{E}[d \mid do(z = 1)] \left( p(y \mid do(d = 1)) - p(y \mid do(d = 0)) \right).
+\end{equation}
+
+Analogously, when $z=0$, we get
+%\begin{align*}
+%	p(y \mid do(z = 0)) &= p(y \mid do(d = 1)) \cdot p(d = 1 \mid do(z = 0)) + p(y \mid do(d = 0)) \cdot p(d = 0 \mid do(z = 0)) \\
+%	&= p(y \mid do(d = 1)) \cdot \mathbb{E}[d \mid do(z = 0)] + p(y \mid do(d = 0)) \left( 1 - \mathbb{E}[d \mid do(z = 0)] \right) \\
+%	&= p(y \mid do(d = 0)) + \mathbb{E}[d \mid do(z = 0)] \left( p(y \mid do(d = 1)) - p(y \mid do(d = 0)) \right),
+%\end{align*}
+%and solving again for $p(y \mid do(d = 0))$ gives
+\begin{equation}\label{eq:pt2}
+	\mathbb{E}[y \mid do(d = 0)] = \mathbb{E}[y \mid do(z = 0)] - \mathbb{E}[d \mid do(z = 0)] \left( \mathbb{E}[y \mid do(d = 1)] - \mathbb{E}[y \mid do(d = 0)] \right).
+\end{equation}
+
+Subtracting \eqref{eq:pt1} $-$ \eqref{eq:pt2} gives
+\[
+	0 = \mathbb{E}[y \mid do(z = 1)] - \mathbb{E}[y \mid do(z = 0)] + \left( \mathbb{E}[y \mid do(d = 1)] - \mathbb{E}[y \mid do(d = 0)] \right) \cdot \left( \mathbb{E}[d \mid do(z = 0)] - \mathbb{E}[d \mid do(z = 1)] \right),
+\]
+and solving for our quantity of interest, namely $\delta = \mathbb{E}[y \mid do(d = 1)] - \mathbb{E}[y \mid do(d = 0)]$, gives
+\[
+	\delta = \frac{\mathbb{E}[y \mid do(z = 1)] - \mathbb{E}[y \mid do(z = 0)]}{\mathbb{E}[d \mid do(z = 1)] - \mathbb{E}[d \mid do(z = 0)]},
+\]
+which is the Wald estimator.
+
+\section*{Two-Stage Least Squares, Two Ways}
+We had also discussed the derivation of two-stage least squares (2SLS) in two different ways, and whether they yield equivalent estimates.
+
+We started with equations for the treatment $D$ and outcome $Y$, using the instrument $Z$:
+\begin{align}
+	D &= \alpha_0 + \alpha Z + \epsilon_D \label{eq:step1}\\
+	Y &= \delta_0 + \delta D + \epsilon_Y. \label{eq:step2}
+\end{align}
+
+If we use \eqref{eq:step1} to substitute for $D$ in \eqref{eq:step2}, we get
+\begin{align*}
+	Y &= \delta_0 + \delta \left( \alpha_0 + \alpha Z + \epsilon_D \right) + \epsilon_Y \\
+	&= \left( \delta_0 + \delta \alpha_0 \right) + \delta \alpha Z + \left( \delta \epsilon_D + \epsilon_Y \right) \\
+	&= \beta_0 + \beta Z + \eta_Y,
+\end{align*}
+so $\delta_{Wald} = \beta / \alpha$ as Adji derived on the board. We know from basic OLS theory that
+\[
+	\widehat{\beta} = \frac{Cov(Y, Z)}{Var(Z)}
+\]
+and
+\begin{equation}\label{eq:alpha_hat}
+	\widehat{\alpha} = \frac{Cov(D, Z)}{Var(Z)},
+\end{equation}
+so
+\begin{equation}\label{eq:delta_hat}
+	\widehat{\delta}_{Wald} = \frac{Cov(Y, Z)}{Cov(D, Z)}
+\end{equation}
+(here I'm using $Cov(Y, Z)$ to denote the finite-sample covariance of $Y$ and $Z$, as opposed to the population covariance).
+
+In practice, what people usually do is run the regression in \eqref{eq:step1}, calculate $\widehat{D} = \widehat{\alpha_0} +\widehat{\alpha} Z$, and substitute $\widehat{D}$ for $D$ in \eqref{eq:step2}. If we do this, \eqref{eq:step2} becomes
+\begin{align*}
+	Y &= \delta_0 + \delta \left( \widehat{\alpha_0} +\widehat{\alpha} Z \right) + \epsilon_Y \\
+	&= \left( \delta_0 + \delta \widehat{\alpha_0} \right) + \delta \left( \widehat{\alpha} Z \right) + \epsilon_Y.
+\end{align*}
+Again from OLS theory, we know that
+\begin{align*}
+	\widehat{\delta} &= \frac{Cov(Y, \widehat{\alpha}Z)}{Var(\widehat{\alpha}Z)} \\
+	&= \frac{\widehat{\alpha} ~ Cov(Y, Z)}{\widehat{\alpha}^2 ~ Var(Z)} \\
+	&= \frac{Cov(Y, Z)}{\widehat{\alpha} ~ Var(Z)}.
+\end{align*}
+Using the definition of $\widehat{\alpha}$ in \eqref{eq:alpha_hat}, we have that
+\begin{align*}
+	\widehat{\delta} &= \frac{Cov(Y, Z)}{\widehat{\alpha} ~ Var(Z)} \\
+	&= \frac{Cov(Y, Z)}{Cov(D, Z)} \\
+	&= \widehat{\delta}_{Wald}
+\end{align*}
+as in \eqref{eq:delta_hat}.
+
+\end{document}
