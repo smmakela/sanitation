@@ -12,7 +12,7 @@ data {
   vector<lower=0, upper=1>[N] hindu;   // prop hh's with hindu head
 }
 parameters {
-  vector[N] u;
+  vector[J] u;
   real<lower=0> sigma_u;
   real alpha0;
   real alpha1;
